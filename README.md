@@ -1,8 +1,26 @@
-# GcpDirectory
+# Google Cloud Print Directory
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/gcp_directory`. To experiment with that code, run `bin/console` for an interactive prompt.
+Listen to a directory for new files and send files to Google Cloud Print.
 
-TODO: Delete this and the text above, and describe your gem
+## Usage
+
+1. Pick a directory to watch for changes.
+2. Create a config.yml file in the directory. Format specified below.
+3. `gcp_listen PATH_TO_DIRECTORY`
+
+### Setup OAUTH
+
+1. Get secrets from from Google API Console website: https://console.developers.google.com
+2. <img src='google_api_console.png' />
+3. Copy client secrets file to `.secrets.json` in listening directory.
+4. run `gcp_fetch_token PATH_TO_DIRECTORY`
+
+If you need to listen to multiple directories startup more than one program.
+
+### config.yml
+```yaml
+
+```
 
 ## Installation
 
@@ -20,10 +38,6 @@ Or install it yourself as:
 
     $ gem install gcp_directory
 
-## Usage
-
-TODO: Write usage instructions here
-
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
@@ -32,7 +46,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/gcp_directory.
+Bug reports and pull requests are welcome on GitHub at https://github.com/ddrscott/gcp_directory.
 
 
 ## License

@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "gcp_directory"
+
+GcpDirectory.directory = ARGV[0] || raise('first argument must by listening directory')
+
+listener = Listen.to(GcpDirectory.directory) do |modified, added, removed|
+  puts "modified absolute path: #{modified}"
+  puts "added absolute path: #{added}"
+  puts "removed absolute path: #{removed}"
+end
+listener.start # not blocking
+$stderr.puts 'Press <CTRL-C> to stop listening'
+sleep

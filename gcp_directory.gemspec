@@ -4,33 +4,27 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'gcp_directory/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "gcp_directory"
+  spec.name          = 'gcp_directory'
   spec.version       = GcpDirectory::VERSION
-  spec.authors       = ["Scott Pierce"]
-  spec.email         = ["scott.pierce@centro.net"]
+  spec.authors       = ['Scott Pierce']
+  spec.email         = ['ddrscott@gmail.com']
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
-  spec.license       = "MIT"
+  spec.summary       = 'Listen for changes to a directory and send documents to Google Cloud Print'
+  spec.homepage      = 'https:://github.com/ddrscott/gcp_directory'
+  spec.license       = 'MIT'
 
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
-  else
-    raise "RubyGems 2.0 or newer is required to protect against " \
-      "public gem pushes."
-  end
-
-  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
+  spec.files = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
   end
-  spec.bindir        = "exe"
+  spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+  spec.require_paths = ['lib']
 
-  spec.add_development_dependency "bundler", "~> 1.14"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_dependency 'google-api-client', '~> 0.11'
+  spec.add_dependency 'listen', '~>3.0'
+  spec.add_dependency 'wdm', '>= 0.1.0' if Gem.win_platform?
+  spec.add_development_dependency 'pry'
+  spec.add_development_dependency 'bundler', '~> 1.14'
+  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'rspec', '~> 3.0'
 end
