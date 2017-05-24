@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['ddrscott@gmail.com']
 
   spec.summary       = 'Listen for changes to a directory and send documents to Google Cloud Print'
-  spec.homepage      = 'https:://github.com/ddrscott/gcp_directory'
+  spec.homepage      = 'https://github.com/ddrscott/gcp_directory'
   spec.license       = 'MIT'
 
   spec.files = `git ls-files -z`.split("\x0").reject do |f|
