@@ -1,13 +1,14 @@
 # external libs
 require 'active_support/all'
 require 'google/api_client/client_secrets'
-require 'json'
 require 'httparty'
-require 'semantic_logger'
-require 'yaml'
+require 'json'
 require 'listen'
+require 'semantic_logger'
+require 'webrick'
+require 'yaml'
 
-SemanticLogger.default_level = :trace
+SemanticLogger.default_level = :debug
 SemanticLogger.add_appender(file_name: 'listener.log', formatter: :color)
 
 # Listen for changes in a directory and send to Google Cloud Print

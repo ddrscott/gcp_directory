@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gcp_directory (0.1.0)
+    gcp_directory (0.3.0)
       activesupport
       google-api-client (~> 0.11)
       httparty

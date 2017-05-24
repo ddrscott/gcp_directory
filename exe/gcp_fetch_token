@@ -1,10 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'bundler/setup'
-require 'webrick'
-require 'pry'
-
 require 'gcp_directory'
 
 GcpDirectory.directory = ARGV[0] || raise('first argument must by listening directory')
+
 GcpDirectory.fetch_token
