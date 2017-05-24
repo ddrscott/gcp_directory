@@ -61,6 +61,7 @@ module GcpDirectory
   end
 
   def self.refresh_token
+    logger.info('Refreshing auth token')
     auth = auth_client(token_path)
     auth.refresh!
     write_token(auth)

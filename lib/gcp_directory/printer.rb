@@ -6,7 +6,7 @@ module GcpDirectory
 
     debug_output(GcpDirectory.logger)
 
-    def initialize(auth = GcpDirectory.auth_client(GcpDirectory.token_path))
+    def initialize(auth = GcpDirectory.token_client)
       auth.access_token || raise(ArgumentError, "`access_token` not set in #{auth}")
       @auth = auth
     end

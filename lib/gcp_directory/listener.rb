@@ -4,9 +4,8 @@ module GcpDirectory
   # Watch for changes and send to API
   class Listener
 
-    def initialize(auth=GcpDirectory.token_client)
-      @api = Printer.new(auth)
-
+    def initialize
+      @api = Printer.new
     end
 
     def logger
@@ -17,8 +16,18 @@ module GcpDirectory
       GcpDirectory.logger
     end
 
+    def refresh_token_if_needed
+      if @last_refresh.nil? or @last_refresh < 59.minutes.ago
+        GcpDirectory.refresh_token
+        @last_refresh = Time.now
+        @api = Printer.new
+      end
+    end
+
     def print(added)
       return if added =~ /\.(done|error|json)$/
+      refresh_token_if_needed
+
       GcpDirectory.config[:printerid] || raise(ArgumentError, '`printerid` not defined in config!')
       options = GcpDirectory.config.merge(
         title: added,

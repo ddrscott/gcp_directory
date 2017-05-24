@@ -5,8 +5,5 @@ require 'gcp_directory'
 
 GcpDirectory.directory = ARGV[0] || raise('first argument must by listening directory')
 
-# always update token
-GcpDirectory.refresh_token
-
 # list for files
 GcpDirectory::Listener.listen
