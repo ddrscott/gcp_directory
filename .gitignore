@@ -12,3 +12,4 @@
 
 .secrets.json
 .token.json
+*.log

@@ -24,6 +24,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'listen', '~>3.0'
   spec.add_dependency 'wdm', '>= 0.1.0' if Gem.win_platform?
   spec.add_dependency 'httparty'
+  spec.add_dependency 'semantic_logger'
+  spec.add_dependency 'activesupport'
   spec.add_development_dependency 'pry'
   spec.add_development_dependency 'bundler', '~> 1.14'
   spec.add_development_dependency 'rake', '~> 10.0'

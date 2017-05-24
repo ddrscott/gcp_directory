@@ -4,6 +4,8 @@ module GcpDirectory
     include HTTParty
     base_uri 'https://www.google.com/cloudprint'
 
+    debug_output(GcpDirectory.logger)
+
     def initialize(auth = GcpDirectory.auth_client(GcpDirectory.token_path))
       auth.access_token || raise(ArgumentError, "`access_token` not set in #{auth}")
       @auth = auth
@@ -13,7 +15,7 @@ module GcpDirectory
       self.class.post('/jobs', with_default_options(options))
     end
 
-    def submit(printerid:, title:, ticket: default_ticket)
+    def submit(printerid:, title:, content:, ticket: default_ticket)
       self.class.post('/submit', with_default_options(body: {
         printerid: printerid,
         title: title,

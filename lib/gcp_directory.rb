@@ -1,14 +1,23 @@
 # external libs
+require 'active_support/all'
 require 'google/api_client/client_secrets'
 require 'json'
+require 'httparty'
+require 'semantic_logger'
+require 'yaml'
+require 'listen'
 
-# internal libs
-require 'gcp_directory/version'
+SemanticLogger.default_level = :trace
+SemanticLogger.add_appender(file_name: 'listener.log', formatter: :color)
 
 # Listen for changes in a directory and send to Google Cloud Print
 module GcpDirectory
 
-  CALLBACK_URL = 'http://localhost:8000/callback'
+  CALLBACK_URL = 'http://localhost:8000/callback'.freeze
+
+  def self.logger
+    SemanticLogger['Listener']
+  end
 
   def self.directory=(dir)
     @directory = dir
@@ -18,12 +27,20 @@ module GcpDirectory
     @directory ||= File.expand_path('.')
   end
 
+  def self.config
+    JSON.parse(File.read(File.join(directory, 'printer.json'))).symbolize_keys
+  end
+
   def self.secrets_path
     File.join(directory, '.secrets.json')
   end
 
   def self.token_path
     File.join(directory, '.token.json')
+  end
+
+  def self.token_client
+    auth_client(token_path)
   end
 
   def self.auth_client(path)
@@ -94,3 +111,8 @@ module GcpDirectory
     https://www.google.com/cloudprint/submit
   end
 end
+
+# internal libs
+require 'gcp_directory/version'
+require 'gcp_directory/printer'
+require 'gcp_directory/listener'
