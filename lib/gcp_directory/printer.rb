@@ -15,19 +15,13 @@ module GcpDirectory
       self.class.post('/jobs', with_default_options(options))
     end
 
-    def submit(printerid:, title:, content:, ticket: default_ticket)
+    def submit(printerid:, title:, content:, ticket:)
       self.class.post('/submit', with_default_options(body: {
         printerid: printerid,
         title: title,
-        ticket: ticket.to_json
+        ticket: ticket.to_json,
+        content: content
       }))
-    end
-
-    def default_ticket
-      {
-        version: '1.0',
-        print: {}
-      }
     end
 
     def with_default_options(**options)

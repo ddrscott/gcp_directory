@@ -28,7 +28,7 @@ module GcpDirectory
   end
 
   def self.config
-    JSON.parse(File.read(File.join(directory, 'printer.json'))).symbolize_keys
+    JSON.parse(File.read(File.join(directory, 'config.json'))).symbolize_keys
   end
 
   def self.secrets_path

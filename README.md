@@ -11,15 +11,20 @@ Listen to a directory for new files and send files to Google Cloud Print.
 ### Setup OAUTH
 
 1. Get secrets from from Google API Console website: https://console.developers.google.com
-2. <img src='google_api_console.png' />
-3. Copy client secrets file to `.secrets.json` in listening directory.
-4. run `gcp_fetch_token PATH_TO_DIRECTORY`
+2. Copy client secrets file to `.secrets.json` in listening directory. <img src='google_api_console.png' />
+3. run `gcp_fetch_token PATH_TO_DIRECTORY`
 
 If you need to listen to multiple directories startup more than one program.
 
-### config.yml
-```yaml
-
+### config.json
+```json
+{
+  "printerid": "some_printer_id",
+  "ticket": {
+    "version": "1.0",
+    "print": {}
+  }
+}
 ```
 
 ## Installation

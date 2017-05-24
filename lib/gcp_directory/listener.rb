@@ -12,12 +12,13 @@ module GcpDirectory
     def logger
       GcpDirectory.logger
     end
+
     def self.logger
       GcpDirectory.logger
     end
 
     def print(added)
-      return if added =~ /\.(done|error)$/
+      return if added =~ /\.(done|error|json)$/
       GcpDirectory.config[:printerid] || raise(ArgumentError, '`printerid` not defined in config!')
       options = GcpDirectory.config.merge(
         title: added,
@@ -33,11 +34,7 @@ module GcpDirectory
 
     def self.listen
       instance = GcpDirectory::Listener.new
-
       listener = Listen.to(GcpDirectory.directory) do |modified, added, removed|
-        logger.debug "modified absolute path: #{modified}"
-        logger.debug "added absolute path: #{added}"
-        logger.debug "removed absolute path: #{removed}"
         added.each { |file| instance.print(file) } if added
       end
       listener.start # not blocking
